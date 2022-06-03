@@ -1,2 +1,2 @@
 # GorillaPlayerModelModProject-Master
-Unity project with scripts allowing you to create Playermodel files (*.gtmodel)
+Unity project version 2019.3.15 with scripts allowing you to create Playermodel files (*.gtmodel)
