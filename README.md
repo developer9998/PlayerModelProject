@@ -33,6 +33,8 @@ Enable the OfflineRig_GorillaPlayer
 Press play in the editor.
 If the Playermodel was setup correctly, the playermodel should be aligned to the OfflineRig_GorillaPlayer with green shaped on the arms
 
+![image](https://user-images.githubusercontent.com/65086429/172035710-3565cc07-5845-4917-bed4-df27cb0dccfa.png)
+
 Press play again to exit.
 
 Next step is to export the .gtmodel file
