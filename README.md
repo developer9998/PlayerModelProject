@@ -20,17 +20,17 @@ Import your model with the rig from the .blend file, and attach it to the GameOb
 Apply your materials to the model
 Assign the specified bones to the PlayermodelDescriptor
 
-To test the playermodel in the editor
-Enable the OfflineRig_GorillaPlayer
-Press play in the editor
+To test the playermodel in the editor,
+Enable the OfflineRig_GorillaPlayer.
+Press play in the editor.
 If the Playermodel was setup correctly, your playermodel should be copying the pose of the OfflineRig_GorillaPlayer
-Also, green shapes should apear on your playermodel arms
-Press play again to exit
+Also, green shapes should apear on your playermodel arms.
+Press play again to exit.
 
-Last is to export the .gtmodel file
+Last is to export the .gtmodel file.
 
-Go the Menu item "Assets"
-Then "Create Player Model"
+Go the Menu item "Assets".
+Then "Create Player Model".
 
 The Console will print the name of your player model
 The playermodel is exported to the PlayerModelOutput Folder
