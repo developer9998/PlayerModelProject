@@ -20,14 +20,22 @@ Import your model with the rig from the .blend file, and attach it to the GameOb
 Apply your materials to the model
 Assign the specified bones to the PlayermodelDescriptor
 
+Specific bones highlighted in red (naming of the bones don't matter)
+
+I'm using the PlayerModelMod_FBX_Example.fbx as an example (In the Assets folder)
+
+![image](https://user-images.githubusercontent.com/65086429/172035609-9c94028e-437c-41ed-ac81-cb9d654a99d3.png)
+![image](https://user-images.githubusercontent.com/65086429/172035618-70e3a86e-f8ec-4e92-a4c6-36894f6a1c13.png)
+
+
 To test the playermodel in the editor,
 Enable the OfflineRig_GorillaPlayer
 Press play in the editor.
-If the Playermodel was setup correctly, your playermodel should be copying the pose of the OfflineRig_GorillaPlayer
-Also, green shapes should apear on your playermodel arms.
+If the Playermodel was setup correctly, the playermodel should be aligned to the OfflineRig_GorillaPlayer with green shaped on the arms
+
 Press play again to exit.
 
-Last is to export the .gtmodel file
+Next step is to export the .gtmodel file
 
 Go the Menu item "Assets"
 Then "Create Player Model"
