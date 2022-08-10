@@ -15,6 +15,7 @@ Will change in the future, in the .blend file KEEP the transforms to 0.01 for sc
 - Custom Color : Enables custom colors on your playermodel
 - Game Mode Textures : Enables Game Mode Textures on your playermodel
 
+## Creation Guide
 Create an Empty GameObject and reset the transforms, attach the PlayermodelDescriptor to it.
 Import your model with the rig from the .blend file, and attach it to the GameObject.
 Apply your materials to the model
