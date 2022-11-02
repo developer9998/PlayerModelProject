@@ -16,11 +16,6 @@ public class CreateMisc : MonoBehaviour
         GameObject obj = Selection.activeGameObject;
 
         misc_descriptor misc = obj.GetComponent<misc_descriptor>();
-        
-
-        
-
-        
 
         prefabPath = "Assets/MISC/" + "misc" + ".prefab";
         filePath = "Assets/MISC";
@@ -28,12 +23,9 @@ public class CreateMisc : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-
-
         var prefabAsset = PrefabUtility.SaveAsPrefabAsset(obj.gameObject, prefabPath);
 
         GameObject contentsRoot = PrefabUtility.LoadPrefabContents(prefabPath);
-
 
         contentsRoot.name = "misc";
 
