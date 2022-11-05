@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class CreatePlayerModel
 {
@@ -28,10 +29,11 @@ public class CreatePlayerModel
                 break;
             }
 
+            
+            
+            
             string PlayerModelName = obj.GetComponent<PlayerModelDescriptor>().PlayerModelName;
             string Author = obj.GetComponent<PlayerModelDescriptor>().Author;
-            
-            
             
             GameObject LeftHand = obj.GetComponent<PlayerModelDescriptor>().lefthand;
             GameObject RightHand = obj.GetComponent<PlayerModelDescriptor>().righthand;
@@ -44,8 +46,26 @@ public class CreatePlayerModel
             Material basemat = obj.GetComponent<PlayerModelDescriptor>().baseMat;
             Material gamemat = obj.GetComponent<PlayerModelDescriptor>().gameMat;
 
+            SkinnedMeshRenderer model_render = model.GetComponent<SkinnedMeshRenderer>();
             
+            if (model.transform.parent.transform.parent != obj.transform || obj.transform.childCount != 1)
+            {
+                Debug.Log(model.transform.parent.transform.parent + " == " + obj.transform);
+                if(model.transform.parent == obj.transform)
+                {
+                    Debug.LogError("PlayerModelDescriptor is not assigned to the proper gameobject - Need to be assigned to an empty gameobject.");
+                }
+                else
+                {
+                    Debug.LogError("PlayerModelDescriptor is not assigned to the proper gameobject.");
+                }
+                
+                build = false;
+                break;
+            }
+
             
+
 
             if (PlayerModelName == null || PlayerModelName == "")
             {
@@ -88,6 +108,13 @@ public class CreatePlayerModel
             if (model == null)
             {
                 Debug.LogError("'model' gameobject is missing");
+                build = false;
+            }
+
+            
+            if(model_render == null)
+            {
+                Debug.LogError("Your 'Model' gameobject has to be a rigged model (Missing SkinnedMeshRenderer)");
                 build = false;
             }
 
@@ -138,22 +165,22 @@ public class CreatePlayerModel
             AssetDatabase.CreateFolder("Assets", "Temp");
         }
 
-        
 
         prefabPath = "Assets/Temp/" + PlayerModelName + ".prefab";
-        
+        if (File.Exists(prefabPath))
+        {
+            File.Delete(prefabPath);
+            File.Delete(prefabPath + ".meta");
+        }
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-
-        
-        
 
         var prefabAsset = PrefabUtility.SaveAsPrefabAsset(obj.gameObject, prefabPath);
 
         GameObject contentsRoot = PrefabUtility.LoadPrefabContents(prefabPath);
 
-        
+
         contentsRoot.name = "playermodel.ParentObject";
 
         string newprefabPath = "Assets/Temp/" + contentsRoot.name + ".prefab";
@@ -209,14 +236,14 @@ public class CreatePlayerModel
             //Debug.Log("Removed FingerScript");
             Object.DestroyImmediate(contentsRoot.GetComponent<fingermovement>());
         }
-        
+
         PrefabUtility.SaveAsPrefabAsset(contentsRoot, newprefabPath);
         PrefabUtility.UnloadPrefabContents(contentsRoot);
 
         if (File.Exists(prefabPath))
         {
             File.Delete(prefabPath);
-            File.Delete(prefabPath+".meta");
+            
         }
 
         AssetImporter.GetAtPath(newprefabPath).SetAssetBundleNameAndVariant("playermodel.assetbundle", "");
@@ -250,40 +277,24 @@ public class CreatePlayerModel
             File.Delete(newprefabPath + ".meta");
         }
 
-        /*string asset_manifest = assetBundleDirectory + "/playermodel.assetbundle.manifest";
-        Debug.Log(asset_manifest);
-        if (File.Exists(asset_manifest))
-        {
-            File.Delete(asset_manifest);
-        }*/
-
-        /*string folder_manifest = assetBundleDirectory + "/PlayerModelOutput";
-        //Debug.Log(folder_manifest);
-        if (File.Exists(folder_manifest))
-        {
-            File.Delete(folder_manifest);
-
-            File.Delete(folder_manifest + ".manifest");
-        }*/
-
 
 
         if (File.Exists(gtfile))
         {
             File.Delete(gtfile);
             File.Move(asset_temp, gtfile);
-            Debug.Log("Updated " + PlayerModelName);
+            Debug.Log("Updated " + gtfile);
 
         }
         else
         {
             File.Move(asset_temp, gtfile);
-            Debug.Log("Created " + PlayerModelName);
+            Debug.Log("Created " + gtfile);
         }
 
 
         AssetDatabase.Refresh();
         Debug.ClearDeveloperConsole();
-        
+
     }
 }
