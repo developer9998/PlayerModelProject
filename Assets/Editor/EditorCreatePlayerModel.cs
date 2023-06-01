@@ -12,8 +12,9 @@ public class CreatePlayerModel
 
     static public string filePath;
 
-    
-
+    static Material gamemat;
+    static Material basemat;
+    static bool lipsync;
     [MenuItem("Assets/Create Player Model")]
     static public void BuildAssetBundle()
     {
@@ -43,11 +44,16 @@ public class CreatePlayerModel
 
             bool customcolors = obj.GetComponent<PlayerModelDescriptor>().CustomColors;
             bool gametextures = obj.GetComponent<PlayerModelDescriptor>().GameModeTextures;
-            Material basemat = obj.GetComponent<PlayerModelDescriptor>().baseMat;
-            Material gamemat = obj.GetComponent<PlayerModelDescriptor>().gameMat;
+            basemat = obj.GetComponent<PlayerModelDescriptor>().BaseMaterial;
+            gamemat = obj.GetComponent<PlayerModelDescriptor>().GameMaterial;
+
+            lipsync = obj.GetComponent<PlayerModelDescriptor>().LipSync;
+
 
             SkinnedMeshRenderer model_render = model.GetComponent<SkinnedMeshRenderer>();
-            
+
+            int blendShapeCount = model_render.sharedMesh.blendShapeCount;
+
             if (model.transform.parent.transform.parent != obj.transform || obj.transform.childCount != 1)
             {
                 Debug.Log(model.transform.parent.transform.parent + " == " + obj.transform);
@@ -128,6 +134,11 @@ public class CreatePlayerModel
                 Debug.LogError("'GameModeTextures' is true but 'Game Material' is missing");
                 build = false;
             }
+            if(lipsync && blendShapeCount == 0)
+            {
+                Debug.LogError("You have 'LipSync' checked On, but your model is missing blend shapes/shape keys");
+                build = false;
+            }
 
             break;
         }
@@ -206,9 +217,19 @@ public class CreatePlayerModel
 
         Text player_info = contentsRoot.AddComponent<Text>();
         string split = "$";
-        string mat = desc.baseMat.name + " (Instance)";
-        string gameMat = desc.gameMat.name + " (Instance)";
+        string mat = "";
+        string gameMat = "";
 
+        if (bool1)
+        {
+            mat = basemat.name + " (Instance)";
+        }
+
+        if (bool2)
+        {
+            gameMat = gamemat.name + " (Instance)";
+        }
+        
 
         List<string> data = new List<string>();
 
@@ -218,6 +239,7 @@ public class CreatePlayerModel
         data.Add(GameModeTextures);
         data.Add(mat);
         data.Add(gameMat);
+        data.Add(lipsync.ToString()); //PlayerModel Version (proper scaling, finger movement, mouth movement)
 
         for (int i = 0; i < data.Count; i++)
         {
