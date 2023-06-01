@@ -20,14 +20,18 @@ public class PlayerModelDescriptor : MonoBehaviour
     public GameObject model;
 
     public bool CustomColors = false;
-    public Material baseMat;
+    public Material BaseMaterial;
 
     public bool GameModeTextures = false;
-    public Material gameMat;
+    public Material GameMaterial;
+
+    public bool LipSync = false;
 
     static private string prefabPath;
 
     static public string filePath;
+
+    
 
     // Start is called before the first frame update
     void Start()
