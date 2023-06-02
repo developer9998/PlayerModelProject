@@ -1,8 +1,7 @@
 # PlayerModelProject
 Unity project version 2019.3.15 with scripts allowing you to create Playermodel files (*.gtmodel)
 
-Use the .blend file in the assets folder for the rig (made for the playermodel mod) 
-Will change in the future, in the .blend file KEEP the transforms to 0.01 for scaling
+Use the PlayerModel_Template.blend file in the assets folder for the rig (made for the PlayerModel v1.2.0)
 
 ![image](https://user-images.githubusercontent.com/65086429/172030977-3c47a981-4416-465b-9d55-75e243fa4e16.png)
 
