@@ -22,8 +22,6 @@ Assign the specified bones to the PlayermodelDescriptor
 
 Specific bones highlighted in red (naming of the bones don't matter)
 
-I'm using the PlayerModelMod_FBX_Example.fbx as an example (In the Assets folder)
-
 ![image](https://user-images.githubusercontent.com/65086429/172035609-9c94028e-437c-41ed-ac81-cb9d654a99d3.png)
 ![image](https://user-images.githubusercontent.com/65086429/172035618-70e3a86e-f8ec-4e92-a4c6-36894f6a1c13.png)
 
